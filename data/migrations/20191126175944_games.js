@@ -3,7 +3,7 @@ exports.up = function(knex) {
     .createTable("games", table => {
       table.increments();
       table
-        .integer("id")
+        .integer("uuid")
         .notNullable()
         .unique();
     })
