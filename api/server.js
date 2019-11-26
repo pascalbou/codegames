@@ -4,7 +4,7 @@ const codegamesRouter = require('../codegames/router');
 const server = express();
 
 server.use(express.json());
-server.use('/api/words', codegamesRouter);
+server.use('/api', codegamesRouter);
 
 server.get('/', (req, res) => {
 	res.send("It's working!");

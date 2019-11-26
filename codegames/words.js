@@ -1952,3 +1952,5 @@ const allWords = [
   "zoo",
   "zulu"
 ];
+
+module.exports = allWords;
