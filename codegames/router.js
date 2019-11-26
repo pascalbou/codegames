@@ -51,7 +51,7 @@ function get25words() {
   return game;
 }
 
-router.get("/words", (req, res) => {
+router.get("/newgame", (req, res) => {
   try {
     const result = get25words();
     res.status(200).json(result);
