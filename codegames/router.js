@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const allWords = require("./words");
+const uuidv4 = require('uuid/v4');
 
 class Card {
   constructor(id, word, type) {
@@ -16,6 +17,7 @@ function getRandomNumber(max) {
 function get25words() {
   let allrn = [];
   let allCards = [];
+
 
   for (i = 0; i < 10; i++) {
     allCards[i] = new Card((id = i), (word = ""), (type = "red"));
@@ -34,14 +36,19 @@ function get25words() {
   }
 
   for (i = 0; i < 25; i++) {
-    let rn = getRandomNumber(allWords.length);
+	let rn = getRandomNumber(allWords.length);
+
     if (allrn.includes(rn) === false) {
       allrn.push(rn);
-      allCards[i].word = allWords[rn]
+	  allCards[i].word = allWords[rn]
     }
   }
 
-  return allCards;
+  const game = {};
+  game.id = uuidv4();
+  game.cards = allCards;
+
+  return game;
 }
 
 router.get("/words", (req, res) => {
