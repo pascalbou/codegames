@@ -2,12 +2,12 @@ const router = require("express").Router();
 const allWords = require("./words");
 
 class Card {
-    constructor(id, word, type) {
-      this.id = id;
-      this.word = word;
-      this.type = type;
-    }
+  constructor(id, word, type) {
+    this.id = id;
+    this.word = word;
+    this.type = type;
   }
+}
 
 function getRandomNumber(max) {
   return Math.floor(Math.random() * max) + 1;
@@ -15,18 +15,33 @@ function getRandomNumber(max) {
 
 function get25words() {
   let allrn = [];
-  let gameWords = [];
+  let allCards = [];
+
+  for (i = 0; i < 10; i++) {
+    allCards[i] = new Card((id = i), (word = ""), (type = "red"));
+  }
+
+  for (i = 10; i < 18; i++) {
+    allCards[i] = new Card((id = i), (word = ""), (type = "blue"));
+  }
+
+  for (i = 18; i < 24; i++) {
+    allCards[i] = new Card((id = i), (word = ""), (type = "white"));
+  }
+
+  for (i = 24; i < 25; i++) {
+    allCards[i] = new Card((id = i), (word = ""), (type = "black"));
+  }
 
   for (i = 0; i < 25; i++) {
     let rn = getRandomNumber(allWords.length);
     if (allrn.includes(rn) === false) {
       allrn.push(rn);
-      gameWords.push(allWords[rn]);
-      // return allWords[rn];
+      allCards[i].word = allWords[rn]
     }
   }
 
-    return gameWords;
+  return allCards;
 }
 
 router.get("/words", (req, res) => {
